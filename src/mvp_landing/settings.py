@@ -37,6 +37,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'signups',
+    'rest_framework',    
 )
 
 MIDDLEWARE_CLASSES = (
@@ -47,6 +48,10 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
+
+REST_FRAMEWORK = {
+    'PAGINATE_BY': 10
+}
 
 ROOT_URLCONF = 'mvp_landing.urls'
 
