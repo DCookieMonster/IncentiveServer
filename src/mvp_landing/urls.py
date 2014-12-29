@@ -109,6 +109,8 @@ router.register(r'users', UserViewSet)
 urlpatterns = [
     url(r'^', include(router.urls)),
     url(r'^about/$', views.about),
+    url(r'^test/$', views.incentiveTest),
+    url(r'^xml/$', views.xml),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]
 
