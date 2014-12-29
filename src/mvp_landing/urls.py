@@ -52,7 +52,6 @@ user_detail = UserViewSet.as_view({
 router = routers.DefaultRouter()
 router.register(r'incentive', views.IncetiveViewSet)
 router.register(r'users', UserViewSet)
-
 #urlpatterns = patterns('',
 #    # Examples:
 #   url(r'^$', 'signups.views.home', name='home'),
@@ -109,14 +108,15 @@ router.register(r'users', UserViewSet)
 # Additionally, we include the login URLs for the browsable API.
 urlpatterns = [
     url(r'^', include(router.urls)),
+    url(r'^about/$', views.about),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]
 
-# Login and logout views for the browsable API
-urlpatterns += [
-    url(r'^api-auth/', include('rest_framework.urls',
-                               namespace='rest_framework')),
-]
+## Login and logout views for the browsable API
+#urlpatterns += [
+#    url(r'^api-auth/', include('rest_framework.urls',
+#                               namespace='rest_framework')),
+#]
 
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL,document_root=settings.STATIC_ROOT)

@@ -50,7 +50,8 @@ MIDDLEWARE_CLASSES = (
 )
 
 REST_FRAMEWORK = {
-    'PAGINATE_BY': 10
+    'PAGINATE_BY': 10,
+    'PAGINATE_BY_PARAM': 'page_size',
 }
 
 ROOT_URLCONF = 'mvp_landing.urls'

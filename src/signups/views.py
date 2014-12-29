@@ -66,6 +66,7 @@ class GroupViewSet(viewsets.ModelViewSet):
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
     
+
     
 class IncetiveViewSet(viewsets.ModelViewSet):
     """
@@ -80,8 +81,8 @@ class IncetiveViewSet(viewsets.ModelViewSet):
 
     @detail_route(renderer_classes=[renderers.StaticHTMLRenderer])
     def highlight(self, request, *args, **kwargs):
-        snippet = self.get_object()
-        return Response(snippet.highlighted)
+        incentive = self.get_object()
+        return Response(incentive.highlighted)
 
     def perform_create(self, serializer):
             serializer.save(owner=self.request.user)
@@ -243,7 +244,8 @@ def incetive_detail(request, pk):
 def api_root(request, format=None):
     return Response({
         'users': reverse('user-list', request=request, format=format),
-        'incentive': reverse('incentive-list', request=request, format=format)
+        'incentive': reverse('incentive-list', request=request, format=format),
+        'aboutus':reverse('about-list', request=request, format=format)
     })
 
 class IncentiveHighlight(generics.GenericAPIView):
@@ -253,3 +255,7 @@ class IncentiveHighlight(generics.GenericAPIView):
     def get(self, request, *args, **kwargs):
         incentive = self.get_object()
         return Response(incentive.highlighted)
+    
+@api_view()
+def about(request):
+    return Response({"Created_By": "Dor Amir"})

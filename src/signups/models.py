@@ -46,7 +46,6 @@ class Incentive(models.Model):
         self.highlighted = highlight(self.code, lexer, formatter)
         super(Incentive, self).save(*args, **kwargs)
 
-    
-    
+
 
     
