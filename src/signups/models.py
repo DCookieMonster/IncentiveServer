@@ -23,13 +23,26 @@ class SignUp(models.Model):
     
 
 class Incentive(models.Model):
-    owner = models.ForeignKey('auth.User', related_name='snippets')
+    owner = models.ForeignKey('auth.User', related_name='incentive')
     highlighted = models.TextField()
     created = models.DateTimeField(auto_now_add=True)
-    title = models.CharField(max_length=100, blank=True, default='')
-    code = models.TextField()
+    schemeID= models.IntegerField(default=0)
+    schemeName = models.CharField(max_length=100, blank=True, default='')
+    typeID=models.IntegerField(default=0)
+    typeName=models.CharField(max_length=100,blank=True,default='')
+    status=models.BooleanField(default=True)
+    ordinal=models.IntegerField(null=True,blank=True,default=0)
+    modeID=models.IntegerField(default=0)
+    presentationDuration=models.DateTimeField(auto_now_add=True)
+    groupIncentive=models.BooleanField(default=False)
+    #tag ???
+    text =models.TextField()
+    #image =models.ImageField()
+    condition=models.TextField()
+
+   # code = models.TextField()
     language = models.CharField(choices=LANGUAGE_CHOICES, default='python', max_length=100)
-    email = models.TextField()
+    #email = models.TextField()
 
     class Meta:
         ordering = ('created',)
@@ -40,10 +53,10 @@ class Incentive(models.Model):
         representation of the code snippet.
         """
         lexer = get_lexer_by_name(self.language)
-        options = self.title and {'title': self.title} or {}
-        formatter = HtmlFormatter(email=self.email,
+        options = self.schemeName and {'title': self.schemeName} or {}
+        formatter = HtmlFormatter(text=self.text,
                               full=True, **options)
-        self.highlighted = highlight(self.code, lexer, formatter)
+        self.highlighted = highlight(self.schemeName, lexer, formatter)
         super(Incentive, self).save(*args, **kwargs)
 
 
