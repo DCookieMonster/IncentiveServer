@@ -9,3 +9,7 @@
   background: url("../img/grid.png") repeat-x;
   background-attachment: fixed;
 }
+
+textarea{
+width: 358px;
+}

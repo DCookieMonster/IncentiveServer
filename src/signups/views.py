@@ -9,7 +9,7 @@ from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
-from signups.models import Incentive
+from signups.models import Incentive,Tag
 from signups.serializers import IncentiveSerializer,UserSerializer
 from rest_framework.decorators import detail_route
 from rest_framework import renderers,permissions,status,generics, mixins
@@ -25,10 +25,12 @@ from StringIO import StringIO
 import urllib2,os,json,xmltodict
 import xml.etree.ElementTree as ET
 import os
+from rest_framework.authtoken.models import Token
+
 
 # Create your views here.
 
-from .forms import SignUpForm
+from .forms import SignUpForm,IncentiveFrom
 
 def home(request):
     
@@ -39,6 +41,17 @@ def home(request):
         messages.success(request,'We will be in touch')
         return HttpResponseRedirect('/thank-you/')
     return render_to_response("signups.html",locals(),context_instance=RequestContext(request)) 
+
+def addIncentive(request):
+
+    form = IncentiveFrom(request.POST or None)
+    if form.is_valid():
+        save_it = form.save(commit=False)
+        save_it.save()
+        messages.success(request,'Your Incentive Has been saved')
+       # return HttpResponseRedirect('/thank-you/')
+    return render_to_response("IncentiveForm.html",locals(),context_instance=RequestContext(request))
+
 
 def thankyou(request):
     
@@ -51,10 +64,6 @@ def aboutus(request):
     
     return render_to_response("aboutus.html",locals(),context_instance=RequestContext(request))
 
-
-def fbview(request):
-    data = {'foo': 'bar', 'hello': 'world'}
-    return HttpResponse(json.dumps(data), content_type='application/json')
 
 class UserViewSet(viewsets.ModelViewSet):
     """
@@ -90,7 +99,27 @@ class IncetiveViewSet(viewsets.ModelViewSet):
         return Response(incentive.highlighted)
 
     def perform_create(self, serializer):
-            serializer.save(owner=self.request.user)
+            serializer.save()
+
+# class TagViewSet(viewsets.ModelViewSet):
+#     """
+#     This viewset automatically provides `list`, `create`, `retrieve`,
+#     `update` and `destroy` actions.
+#
+#     Additionally we also provide an extra `highlight` action.
+#     """
+#     queryset = Tag.objects.all()
+#     serializer_class = TagSerializer
+#   #  permission_classes = (permissions.IsAuthenticatedOrReadOnly,IsOwnerOrReadOnly,)
+#
+#     @detail_route(renderer_classes=[renderers.StaticHTMLRenderer])
+#     def highlight(self, request, *args, **kwargs):
+#         tag = self.get_object()
+#         return Response(tag.highlighted)
+#
+#     def perform_create(self, serializer):
+#                    serializer.save()
+
 
 class JSONResponse(HttpResponse):
     """
@@ -108,8 +137,8 @@ def incetive_list(request):
     List all code snippets, or create a new snippet.
     """
     if request.method == 'GET':
-        incetive = Incentive.objects.all()
-        serializer = IncentiveSerializer(incetive, many=True)
+        incentive = Incentive.objects.all()
+        serializer = IncentiveSerializer(incentive, many=True)
         return JSONResponse(serializer.data)
 
     elif request.method == 'POST':
@@ -126,24 +155,24 @@ def incetive_detail(request, pk):
     Retrieve, update or delete a code snippet.
     """
     try:
-        incetive = Incentive.objects.get(pk=pk)
+        incentive = Incentive.objects.get(pk=pk)
     except Incentive.DoesNotExist:
         return HttpResponse(status=404)
 
     if request.method == 'GET':
-        serializer = IncentiveSerializer(incetive)
+        serializer = IncentiveSerializer(incentive)
         return JSONResponse(serializer.data)
 
     elif request.method == 'PUT':
         data = JSONParser().parse(request)
-        serializer = IncentiveSerializer(incetive, data=data)
+        serializer = IncentiveSerializer(incentive, data=data)
         if serializer.is_valid():
             serializer.save()
             return JSONResponse(serializer.data)
         return JSONResponse(serializer.errors, status=400)
 
     elif request.method == 'DELETE':
-        incetive.delete()
+        incentive.delete()
         return HttpResponse(status=204)
     
 
@@ -153,7 +182,6 @@ def api_root(request, format=None):
     return Response({
         'users': reverse('user-list', request=request, format=format),
         'incentive': reverse('incentive-list', request=request, format=format),
-        'aboutus':reverse('about-list', request=request, format=format)
     })
 
 class IncentiveHighlight(generics.GenericAPIView):
@@ -175,10 +203,12 @@ def xml(request):
            str = f.read().replace('\n', '')
         o= xmltodict.parse(str)
     return Response(json.dumps(o))
-    
+
+
 @api_view()
 def about(request):
     return Response({"Created_By": "Dor Amir"})
+
 @api_view()
 def incentiveTest(request):
     """

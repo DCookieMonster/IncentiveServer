@@ -107,14 +107,16 @@ router.register(r'users', UserViewSet)
 # The API URLs are now determined automatically by the router.
 # Additionally, we include the login URLs for the browsable API.
 urlpatterns = [
-    url(r'^api', include(router.urls)),
+    url(r'^api/', include(router.urls)),
     url(r'^about/$', views.about),
     url(r'^test/$', views.incentiveTest),
     url(r'^xml/$', views.xml),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^$', 'signups.views.home', name='home'),
-    url(r'^thank-you/$', 'signups.views.thankyou', name='thankyou'),
-    url(r'^about-us/$', 'signups.views.aboutus', name='aboutus'),
+    url(r'^admin/', include(admin.site.urls)),
+    url(r'^add/','signups.views.addIncentive',name='add')
+   # url(r'^thank-you/$', 'signups.views.thankyou', name='thankyou'),
+   # url(r'^about-us/$', 'signups.views.aboutus', name='aboutus'),
 
 ]
 

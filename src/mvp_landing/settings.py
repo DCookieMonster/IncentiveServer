@@ -37,7 +37,8 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'signups',
-    'rest_framework',    
+    'rest_framework',
+    'rest_framework.authtoken',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -52,7 +53,12 @@ MIDDLEWARE_CLASSES = (
 REST_FRAMEWORK = {
     'PAGINATE_BY': 10,
     'PAGINATE_BY_PARAM': 'page_size',
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ),
 }
+
 
 ROOT_URLCONF = 'mvp_landing.urls'
 
@@ -93,7 +99,7 @@ TEMPLATE_DIRS = (
     os.path.join(os.path.dirname(BASE_DIR),"static","templates"),
 )
 
-LOGIN_REDIRECT_URL = 'home'
+LOGIN_REDIRECT_URL = 'add'
 
 if DEBUG:
     MEDIA_URL = '/media/'

@@ -20,11 +20,12 @@ class SignUp(models.Model):
     
     def __unicode__(self):
         return smart_unicode(self.email)
-    
+
+
 
 class Incentive(models.Model):
-    owner = models.ForeignKey('auth.User', related_name='incentive')
-    highlighted = models.TextField()
+    #owner = models.ForeignKey('auth.User', related_name='incentive')
+   # highlighted = models.TextField()
     created = models.DateTimeField(auto_now_add=True)
     schemeID= models.IntegerField(default=0)
     schemeName = models.CharField(max_length=100, blank=True, default='')
@@ -35,13 +36,12 @@ class Incentive(models.Model):
     modeID=models.IntegerField(default=0)
     presentationDuration=models.DateTimeField(auto_now_add=True)
     groupIncentive=models.BooleanField(default=False)
-    #tag ???
     text =models.TextField()
     #image =models.ImageField()
     condition=models.TextField()
 
    # code = models.TextField()
-    language = models.CharField(choices=LANGUAGE_CHOICES, default='python', max_length=100)
+  #  language = models.CharField(choices=LANGUAGE_CHOICES, default='python', max_length=100)
     #email = models.TextField()
 
     class Meta:
@@ -52,13 +52,47 @@ class Incentive(models.Model):
         Use the `pygments` library to create a highlighted HTML
         representation of the code snippet.
         """
-        lexer = get_lexer_by_name(self.language)
-        options = self.schemeName and {'title': self.schemeName} or {}
-        formatter = HtmlFormatter(text=self.text,
-                              full=True, **options)
-        self.highlighted = highlight(self.schemeName, lexer, formatter)
+        #lexer = get_lexer_by_name(self.language)
+        #options = self.schemeName and {'title': self.schemeName} or {}
+       # formatter = HtmlFormatter(text=self.text,
+      #                        full=True, **options)
+     #   self.highlighted = highlight(self.schemeName, lexer, formatter)
         super(Incentive, self).save(*args, **kwargs)
 
 
+class Tag(models.Model):
+    incentiveID = models.ForeignKey(Incentive,related_name="tags")
+    tagID= models.IntegerField()
+    tagName = models.CharField(max_length=100)
 
-    
+    class Meta:
+        unique_together = ('incentiveID', 'tagID')
+
+    # def save(self, *args, **kwargs):
+    #     super(Tag, self).save(*args, **kwargs)
+
+    def __unicode__(self):
+         return '%d: %s' % (self.tagID, self.tagName)
+
+
+# class TagsInIncentives(models.Model):
+#     owner = models.ForeignKey('auth.User', related_name='incentive')
+#     highlighted = models.TextField()
+#     tagID= models.ForeignKey(Tag)
+#     incentiveID = models.ForeignKey(Incentive)
+#     language = models.CharField(choices=LANGUAGE_CHOICES, default='python', max_length=100)
+#
+#     class Meta:
+#         ordering = ('created',)
+#
+#     def save(self, *args, **kwargs):
+#         """
+#         Use the `pygments` library to create a highlighted HTML
+#         representation of the code snippet.
+#         """
+#         lexer = get_lexer_by_name(self.language)
+#         options = self.tagID and {'name': self.tagID} or {}
+#         formatter = HtmlFormatter(ID=self.incentiveID,
+#                               full=True, **options)
+#         self.highlighted = highlight(self.tagID, lexer, formatter)
+#         super(Incentive, self).save(*args, **kwargs)
