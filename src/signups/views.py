@@ -43,7 +43,8 @@ def home(request):
 def thankyou(request):
     
     
-    return render_to_response("thankyou.html",locals(),context_instance=RequestContext(request)) 
+    return render_to_response("thankyou.html",locals(),context_instance=RequestContext(request))
+
 
 def aboutus(request):
     

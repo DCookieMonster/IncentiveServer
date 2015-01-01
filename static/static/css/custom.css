@@ -1,0 +1,11 @@
+
+
+  a{
+     color: #FFFFFF;
+     font-size: 18px;
+  }
+
+  body {
+  background: url("../img/grid.png") repeat-x;
+  background-attachment: fixed;
+}
