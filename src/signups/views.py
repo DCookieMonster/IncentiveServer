@@ -24,7 +24,6 @@ from bottle import run, route, request
 from StringIO import StringIO
 import urllib2,os,json,xmltodict
 import xml.etree.ElementTree as ET
-import os
 from rest_framework.authtoken.models import Token
 
 
@@ -91,7 +90,7 @@ class IncetiveViewSet(viewsets.ModelViewSet):
     """
     queryset = Incentive.objects.all()
     serializer_class = IncentiveSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,IsOwnerOrReadOnly,)
+  #  permission_classes = (permissions.IsAuthenticatedOrReadOnly,IsOwnerOrReadOnly,)
 
     @detail_route(renderer_classes=[renderers.StaticHTMLRenderer])
     def highlight(self, request, *args, **kwargs):

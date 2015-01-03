@@ -2,13 +2,11 @@
 from __future__ import unicode_literals
 
 from django.db import models, migrations
-from django.conf import settings
 
 
 class Migration(migrations.Migration):
 
     dependencies = [
-        migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
@@ -28,7 +26,6 @@ class Migration(migrations.Migration):
                 ('groupIncentive', models.BooleanField(default=False)),
                 ('text', models.TextField()),
                 ('condition', models.TextField()),
-                ('owner', models.ForeignKey(related_name='incentive', to=settings.AUTH_USER_MODEL)),
             ],
             options={
                 'ordering': ('created',),
@@ -55,14 +52,15 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('tagID', models.IntegerField()),
                 ('tagName', models.CharField(max_length=100)),
-                ('incentiveID', models.ForeignKey(related_name='tags', to='signups.Incentive')),
             ],
             options={
             },
             bases=(models.Model,),
         ),
-        migrations.AlterUniqueTogether(
-            name='tag',
-            unique_together=set([('incentiveID', 'tagID')]),
+        migrations.AddField(
+            model_name='incentive',
+            name='tags',
+            field=models.ManyToManyField(to='signups.Tag', null=True, blank=True),
+            preserve_default=True,
         ),
     ]

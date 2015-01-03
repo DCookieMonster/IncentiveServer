@@ -22,6 +22,17 @@ class SignUp(models.Model):
         return smart_unicode(self.email)
 
 
+class Tag(models.Model):
+    #incentiveID = models.ForeignKey(Incentive,related_name="tags")
+    tagID= models.IntegerField(null=False)
+    tagName = models.CharField(max_length=100)
+
+    # class Meta:
+    #     unique_together = ('incentiveID','tagID')
+
+
+    def __unicode__(self):
+         return '%d: %s' % (self.tagID, self.tagName)
 
 class Incentive(models.Model):
     #owner = models.ForeignKey('auth.User', related_name='incentive')
@@ -37,9 +48,10 @@ class Incentive(models.Model):
     presentationDuration=models.DateTimeField(auto_now_add=True)
     groupIncentive=models.BooleanField(default=False)
     text =models.TextField()
+    tags=models.ManyToManyField(Tag, null=True, blank=True)
     #image =models.ImageField()
     condition=models.TextField()
-
+    # tags = models.ManyToManyField(Tag, null=True, blank=True,related_name="tags")
    # code = models.TextField()
   #  language = models.CharField(choices=LANGUAGE_CHOICES, default='python', max_length=100)
     #email = models.TextField()
@@ -59,20 +71,9 @@ class Incentive(models.Model):
      #   self.highlighted = highlight(self.schemeName, lexer, formatter)
         super(Incentive, self).save(*args, **kwargs)
 
-
-class Tag(models.Model):
-    incentiveID = models.ForeignKey(Incentive,related_name="tags")
-    tagID= models.IntegerField()
-    tagName = models.CharField(max_length=100)
-
-    class Meta:
-        unique_together = ('incentiveID', 'tagID')
-
-    # def save(self, *args, **kwargs):
-    #     super(Tag, self).save(*args, **kwargs)
-
     def __unicode__(self):
-         return '%d: %s' % (self.tagID, self.tagName)
+         return '%d: %s' % (self.schemeID, self.schemeName)
+
 
 
 # class TagsInIncentives(models.Model):
