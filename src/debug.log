@@ -1,0 +1,21 @@
+Internal Server Error: /api/incentive/
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/core/handlers/base.py", line 111, in get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/django/views/decorators/csrf.py", line 57, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/rest_framework/viewsets.py", line 85, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/rest_framework/views.py", line 407, in dispatch
+    response = self.handle_exception(exc)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/rest_framework/views.py", line 404, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/rest_framework/mixins.py", line 21, in create
+    self.perform_create(serializer)
+  File "/Users/dor/Documents/DjangoProjects/IncentiveServer/src/signups/views.py", line 103, in perform_create
+    serializer.save()
+  File "/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/rest_framework/serializers.py", line 164, in save
+    self.instance = self.create(validated_data)
+  File "/Users/dor/Documents/DjangoProjects/IncentiveServer/src/signups/serializers.py", line 55, in create
+    incentive.tags.add(*tags[0])
+TypeError: add() argument after * must be a sequence, not Tag
