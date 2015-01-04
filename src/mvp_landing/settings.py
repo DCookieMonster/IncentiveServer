@@ -101,6 +101,59 @@ TEMPLATE_DIRS = (
 
 LOGIN_REDIRECT_URL = 'add'
 
+# LOGGING = {
+#     'version': 1,
+#     'disable_existing_loggers': False,
+#     'formatters': {
+#         'verbose': {
+#             'format' : "[%(asctime)s] %(levelname)s [%(name)s:%(lineno)s] %(message)s",
+#             'datefmt' : "%d/%b/%Y %H:%M:%S"
+#         },
+#         'simple': {
+#             'format': '%(levelname)s %(message)s'
+#         },
+#     },
+#     'handlers': {
+#         'file': {
+#             'level': 'DEBUG',
+#             'class': 'logging.FileHandler',
+#             'filename': BASE_DIR+'/mysite.log',
+#             'formatter': 'verbose'
+#         },
+#     },
+#     'loggers': {
+#         'django': {
+#             'handlers':['file'],
+#             'propagate': True,
+#             'level':'DEBUG',
+#         },
+#         'signups': {
+#             'handlers': ['file'],
+#             'level': 'DEBUG',
+#         },
+#     }
+# }
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': BASE_DIR+'/debug.log',
+        },
+    },
+    'loggers': {
+        'django.request': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    },
+}
+
+
 if DEBUG:
     MEDIA_URL = '/media/'
     STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR),"static","static-only")

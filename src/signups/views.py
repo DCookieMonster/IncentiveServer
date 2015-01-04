@@ -25,11 +25,12 @@ from StringIO import StringIO
 import urllib2,os,json,xmltodict
 import xml.etree.ElementTree as ET
 from rest_framework.authtoken.models import Token
+import logging
 
 
 # Create your views here.
 
-from .forms import SignUpForm,IncentiveFrom
+from .forms import SignUpForm,IncentiveFrom,TagForm
 
 def home(request):
     
@@ -50,6 +51,7 @@ def addIncentive(request):
         messages.success(request,'Your Incentive Has been saved')
        # return HttpResponseRedirect('/thank-you/')
     return render_to_response("IncentiveForm.html",locals(),context_instance=RequestContext(request))
+
 
 
 def thankyou(request):
