@@ -19,3 +19,4 @@ Traceback (most recent call last):
   File "/Users/dor/Documents/DjangoProjects/IncentiveServer/src/signups/serializers.py", line 55, in create
     incentive.tags.add(*tags[0])
 TypeError: add() argument after * must be a sequence, not Tag
+Not Found: /admin/signups/tag/7/

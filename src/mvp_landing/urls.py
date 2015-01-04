@@ -15,6 +15,9 @@ from django.conf.urls import include
 from django.contrib import admin
 admin.autodiscover()
 
+admin.site.site_header = 'Incentive Server'
+admin.site.site_title = 'Incentive Server'
+admin.site.index_title = 'Admin'
 # Serializers define the API representation.
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
