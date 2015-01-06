@@ -8,7 +8,7 @@ class SignUpAdmin(admin.ModelAdmin):
     class Meta:
         model = SignUp
     
-admin.site.register(SignUp,SignUpAdmin)
+# admin.site.register(SignUp,SignUpAdmin)
 
 class IncentiveAdmin(admin.ModelAdmin):
     class Meta:

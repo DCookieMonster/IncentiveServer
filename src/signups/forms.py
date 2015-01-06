@@ -9,7 +9,3 @@ class SignUpForm(forms.ModelForm):
 class IncentiveFrom(forms.ModelForm):
     class Meta:
         model=Incentive
-
-class TagForm(forms.ModelForm):
-    class Meta:
-        model = Tag

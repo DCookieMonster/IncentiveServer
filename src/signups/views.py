@@ -19,8 +19,6 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework.reverse import reverse
-import bottle
-from bottle import run, route, request
 from StringIO import StringIO
 import urllib2,os,json,xmltodict
 import xml.etree.ElementTree as ET
@@ -30,7 +28,7 @@ import logging
 
 # Create your views here.
 
-from .forms import SignUpForm,IncentiveFrom,TagForm
+from .forms import SignUpForm,IncentiveFrom
 
 def home(request):
     
