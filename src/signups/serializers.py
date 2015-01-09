@@ -4,12 +4,12 @@ from rest_framework import serializers
 from signups.models import Incentive,Tag
 import urllib2,os,json,xmltodict
 
-class UserSerializer(serializers.HyperlinkedModelSerializer):
-    incentive = serializers.HyperlinkedRelatedField(many=True, view_name='incentive-detail', read_only=True)
-
-    class Meta:
-        model = User
-        fields = ('url', 'username', 'email', 'incentive')
+# class UserSerializer(serializers.HyperlinkedModelSerializer):
+#     incentive = serializers.HyperlinkedRelatedField(many=True, view_name='incentive-detail', read_only=True)
+#
+#     class Meta:
+#         model = User
+#         fields = ('url', 'username', 'email', 'incentive')
 
 
 class GroupSerializer(serializers.HyperlinkedModelSerializer):
@@ -22,20 +22,24 @@ class TagSerializer(serializers.ModelSerializer):
         model = Tag
         fields = ('tagID', 'tagName')
 
-# class IncentiveSerializer(serializers.ModelSerializer):
-#     tags=TagSerializer(many=True, read_only=True)
-#     class Meta:
-#         model = Incentive
-#         fields = ('schemeName', 'schemeID','text','typeID','typeName','status','ordinal','tags','modeID',
-#         'groupIncentive','condition')
+
+from django.contrib.auth.models import User
+
+class UserSerializer(serializers.ModelSerializer):
+    incentive = serializers.PrimaryKeyRelatedField(many=True, queryset=Incentive.objects.all())
+
+    class Meta:
+        model = User
+        fields = ('id', 'username', 'incentive')
 
 
 
 class IncentiveSerializer(serializers.ModelSerializer):
     tags=TagSerializer(many=True,  read_only=False)
+    owner = serializers.ReadOnlyField(source='owner.username')
     class Meta:
         model = Incentive
-        fields = ('schemeName', 'schemeID','text','typeID','typeName','status','ordinal','tags','modeID',
+        fields = ('owner','schemeName', 'schemeID','text','typeID','typeName','status','ordinal','tags','modeID',
         'groupIncentive','condition')
 
     def create(self, validated_data):

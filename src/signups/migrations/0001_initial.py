@@ -2,11 +2,13 @@
 from __future__ import unicode_literals
 
 from django.db import models, migrations
+from django.conf import settings
 
 
 class Migration(migrations.Migration):
 
     dependencies = [
+        migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
@@ -26,6 +28,7 @@ class Migration(migrations.Migration):
                 ('groupIncentive', models.BooleanField(default=False)),
                 ('text', models.TextField()),
                 ('condition', models.TextField()),
+                ('owner', models.ForeignKey(related_name='incentive', to=settings.AUTH_USER_MODEL)),
             ],
             options={
                 'ordering': ('created',),

@@ -64,6 +64,7 @@ def aboutus(request):
     return render_to_response("aboutus.html",locals(),context_instance=RequestContext(request))
 
 
+
 class UserViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.
@@ -71,6 +72,17 @@ class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
+from django.contrib.auth.models import User
+
+
+class UserList(generics.ListAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+
+class UserDetail(generics.RetrieveAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
 
 class GroupViewSet(viewsets.ModelViewSet):
     """
@@ -90,15 +102,18 @@ class IncetiveViewSet(viewsets.ModelViewSet):
     """
     queryset = Incentive.objects.all()
     serializer_class = IncentiveSerializer
-  #  permission_classes = (permissions.IsAuthenticatedOrReadOnly,IsOwnerOrReadOnly,)
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,IsOwnerOrReadOnly,)
+
 
     @detail_route(renderer_classes=[renderers.StaticHTMLRenderer])
     def highlight(self, request, *args, **kwargs):
         incentive = self.get_object()
         return Response(incentive.highlighted)
 
+    # def perform_create(self, serializer):
+    #         serializer.save()
     def perform_create(self, serializer):
-            serializer.save()
+        serializer.save(owner=self.request.user)
 
 # class TagViewSet(viewsets.ModelViewSet):
 #     """

@@ -6,6 +6,7 @@ from pygments.lexers import get_all_lexers
 from pygments.styles import get_all_styles
 from pygments.lexers import get_lexer_by_name
 # Create your models here.
+from django.contrib import admin
 
 LEXERS = [item for item in get_all_lexers() if item[1]]
 LANGUAGE_CHOICES = sorted([(item[1][0], item[0]) for item in LEXERS])
@@ -35,7 +36,7 @@ class Tag(models.Model):
          return '%d: %s' % (self.tagID, self.tagName)
 
 class Incentive(models.Model):
-    #owner = models.ForeignKey('auth.User', related_name='incentive')
+    owner = models.ForeignKey('auth.User', related_name='incentive')
    # highlighted = models.TextField()
     created = models.DateTimeField(auto_now_add=True)
     schemeID= models.IntegerField(default=0)
@@ -58,7 +59,9 @@ class Incentive(models.Model):
 
     class Meta:
         ordering = ('created',)
-    
+
+    def user_can_manage_me(self, user):
+        return user == self.owner
     def save(self, *args, **kwargs):
         """
         Use the `pygments` library to create a highlighted HTML
@@ -73,27 +76,3 @@ class Incentive(models.Model):
 
     def __unicode__(self):
          return '%d: %s' % (self.schemeID, self.schemeName)
-
-
-
-# class TagsInIncentives(models.Model):
-#     owner = models.ForeignKey('auth.User', related_name='incentive')
-#     highlighted = models.TextField()
-#     tagID= models.ForeignKey(Tag)
-#     incentiveID = models.ForeignKey(Incentive)
-#     language = models.CharField(choices=LANGUAGE_CHOICES, default='python', max_length=100)
-#
-#     class Meta:
-#         ordering = ('created',)
-#
-#     def save(self, *args, **kwargs):
-#         """
-#         Use the `pygments` library to create a highlighted HTML
-#         representation of the code snippet.
-#         """
-#         lexer = get_lexer_by_name(self.language)
-#         options = self.tagID and {'name': self.tagID} or {}
-#         formatter = HtmlFormatter(ID=self.incentiveID,
-#                               full=True, **options)
-#         self.highlighted = highlight(self.tagID, lexer, formatter)
-#         super(Incentive, self).save(*args, **kwargs)

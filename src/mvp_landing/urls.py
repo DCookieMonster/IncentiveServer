@@ -117,7 +117,9 @@ urlpatterns = [
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^$', 'signups.views.home', name='home'),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^add/','signups.views.addIncentive',name='add')
+    url(r'^add/','signups.views.addIncentive',name='add'),
+    url(r'^users/$', views.UserList.as_view()),
+    url(r'^users/(?P<pk>[0-9]+)/$', views.UserDetail.as_view()),
    # url(r'^thank-you/$', 'signups.views.thankyou', name='thankyou'),
    # url(r'^about-us/$', 'signups.views.aboutus', name='aboutus'),
 
