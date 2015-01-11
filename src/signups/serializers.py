@@ -32,10 +32,11 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ('id', 'username', 'incentive')
 
-
+import logging
+logger = logging.getLogger(__name__)
 
 class IncentiveSerializer(serializers.ModelSerializer):
-    tags=TagSerializer(many=True,  read_only=False)
+    tags = TagSerializer(many=True,  read_only=False)
     owner = serializers.ReadOnlyField(source='owner.username')
     class Meta:
         model = Incentive
@@ -43,6 +44,7 @@ class IncentiveSerializer(serializers.ModelSerializer):
         'groupIncentive','condition')
 
     def create(self, validated_data):
+     #   logger.info(validated_data)
         tags_data = validated_data.pop('tags',[])
         incentive = super(IncentiveSerializer, self).create(validated_data)
         for tag in tags_data:
@@ -60,6 +62,6 @@ class IncentiveSerializer(serializers.ModelSerializer):
             tags = Tag.objects.filter(tagID__in=tags_ids)
             incentive.tags.add(*tags)
 
-        #log.info("added new incentive:"+str(incentive))
+        logger.info("added new incentive:"+str(incentive))
 
         return incentive

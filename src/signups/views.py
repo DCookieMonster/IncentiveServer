@@ -26,12 +26,18 @@ from rest_framework.authtoken.models import Token
 import logging
 
 
+
+
+
+
+
+
+
 # Create your views here.
 
 from .forms import SignUpForm,IncentiveFrom
 
 def home(request):
-    
     form = SignUpForm(request.POST or None)
     if form.is_valid():
         save_it = form.save(commit=False)
@@ -91,7 +97,8 @@ class GroupViewSet(viewsets.ModelViewSet):
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
     
-
+import logging
+logger = logging.getLogger(__name__)
     
 class IncetiveViewSet(viewsets.ModelViewSet):
     """

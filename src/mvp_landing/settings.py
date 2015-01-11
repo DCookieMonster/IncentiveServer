@@ -77,6 +77,18 @@ DATABASES = {
     }
 }
 
+# change it to mysql server
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'DB_NAME',
+#         'USER': 'DB_USER',
+#         'PASSWORD': 'DB_PASSWORD',
+#         'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
+#         'PORT': '3306',
+#     }
+# }
+
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
 
@@ -145,21 +157,41 @@ LOGIN_REDIRECT_URL = 'admin'
 
 LOGGING = {
     'version': 1,
-    'disable_existing_loggers': False,
+    'disable_existing_loggers': True,
+    'formatters': {
+        'verbose': {
+            'format' : "[%(asctime)s] %(levelname)s [%(name)s:%(lineno)s] %(message)s",
+            'datefmt' : "%d/%b/%Y %H:%M:%S"
+        },
+        'simple': {
+            'format': '%(levelname)s %(message)s'
+        },
+        'tracer':{
+            'format':'[%(asctime)s]%(levelname)s[%(funcName)s] %(message)s',
+            'datefmt' : "%d/%b/%Y %H:%M:%S"
+        }
+    },
     'handlers': {
         'file': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
-            'filename': BASE_DIR+'/debug.log',
+            'filename': 'debug.log',
+            'formatter': 'verbose'
+        },
+        'test':{
+            'level': 'INFO',
+            'class': "logging.FileHandler",
+            'filename': 'trace.log',
+            'formatter': 'tracer',
         },
     },
     'loggers': {
-        'django.request': {
-            'handlers': ['file'],
-            'level': 'DEBUG',
-            'propagate': True,
+
+        'signups': {
+            'handlers': ['test'],
+            'level': 'INFO',
         },
-    },
+    }
 }
 
 
