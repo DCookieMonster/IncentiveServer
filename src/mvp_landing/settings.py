@@ -59,6 +59,7 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.SessionAuthentication',
     ),
+    'DEFAULT_FILTER_BACKENDS': ('rest_framework.filters.DjangoFilterBackend',)
 }
 
 
@@ -113,7 +114,7 @@ TEMPLATE_DIRS = (
     os.path.join(os.path.dirname(BASE_DIR),"static","templates"),
 )
 
-LOGIN_REDIRECT_URL = 'admin'
+LOGIN_REDIRECT_URL = 'admin:index'
 
 #
 # from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS as TCP

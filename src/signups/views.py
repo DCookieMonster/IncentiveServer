@@ -63,7 +63,10 @@ def thankyou(request):
     
     return render_to_response("thankyou.html",locals(),context_instance=RequestContext(request))
 
+def wiki(request):
 
+
+    return render_to_response("wiki.html",locals(),context_instance=RequestContext(request))
 def aboutus(request):
     
     
@@ -151,14 +154,30 @@ class JSONResponse(HttpResponse):
         kwargs['content_type'] = 'application/json'
         super(JSONResponse, self).__init__(content, **kwargs)
 
-
 @csrf_exempt
 def incetive_list(request):
     """
     List all code snippets, or create a new snippet.
     """
     if request.method == 'GET':
-        incentive = Incentive.objects.all()
+        #incentive = Incentive.objects.all()
+        staa=request.GET
+        tmp = dict(staa.lists())
+        incentive=None
+        for key in tmp:
+            if key=='tagID':
+                tags = Tag.objects.filter(tagID=tmp[key][0])
+                incentive=Incentive.objects.filter(tags=tags)
+            if key=='status':
+                incentive = Incentive.objects.filter(status=tmp[key])
+            if key=='groupIncentive':
+                incentive = Incentive.objects.filter(groupIncentive=tmp[key])
+            if key=='typeID':
+                incentive = Incentive.objects.filter(typeID =tmp[key][0])
+            if key == 'schemeID':
+                incentive = Incentive.objects.filter(schemeID=tmp[key][0])
+        if incentive is None:
+            return JSONResponse("{err:Wrong Argument}", status=404)
         serializer = IncentiveSerializer(incentive, many=True)
         return JSONResponse(serializer.data)
 
@@ -265,3 +284,21 @@ def incentiveTest(request):
              },
             indent=4))
 
+class IncentiveView(APIView):
+    """
+    View to list all users in the system.
+
+    * Requires token authentication.
+    * Only admin users are able to access this view.
+    """
+    queryset = Incentive.objects.all()
+    serializer_class = IncentiveSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,IsOwnerOrReadOnly,)
+
+
+    def get(self, request, format=None):
+        """
+        Return a list of all users.
+        """
+        usernames = [incentive.status for incentive in Incentive.objects.all()]
+        return Response(usernames)

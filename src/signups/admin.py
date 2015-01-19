@@ -45,16 +45,16 @@ class TagAdmin(admin.ModelAdmin):
     class Meta:
         model = Tag
 
-    def get_readonly_fields(self, request, obj=None):
-        if request.user == obj.owner or request.user.is_superuser:
-            return self.readonly_fields
-
-        if self.declared_fieldsets:
-            return flatten_fieldsets(self.declared_fieldsets)
-        else:
-            return list(set(
-                [field.name for field in self.opts.local_fields] +
-                [field.name for field in self.opts.local_many_to_many]
-            ))
+    # def get_readonly_fields(self, request, obj=None):
+    #     if request.user == obj.owner or request.user.is_superuser:
+    #         return self.readonly_fields
+    #
+    #     if self.declared_fieldsets:
+    #         return flatten_fieldsets(self.declared_fieldsets)
+    #     else:
+    #         return list(set(
+    #             [field.name for field in self.opts.local_fields] +
+    #             [field.name for field in self.opts.local_many_to_many]
+    #         ))
 
 admin.site.register(Tag,TagAdmin)

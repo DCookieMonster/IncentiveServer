@@ -120,8 +120,12 @@ urlpatterns = [
     url(r'^add/','signups.views.addIncentive',name='add'),
     url(r'^users/$', views.UserList.as_view()),
     url(r'^users/(?P<pk>[0-9]+)/$', views.UserDetail.as_view()),
+    url(r'^incentives/$', views.incetive_list,name='incentive-list'),
    # url(r'^thank-you/$', 'signups.views.thankyou', name='thankyou'),
    # url(r'^about-us/$', 'signups.views.aboutus', name='aboutus'),
+    url(r'^wiki/', views.wiki,name='wiki'),
+    url(r'^aboutus/', views.aboutus,name='aboutus'),
+
 
 ]
 
