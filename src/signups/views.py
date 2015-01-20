@@ -37,6 +37,7 @@ import logging
 
 from .forms import SignUpForm,IncentiveFrom
 
+
 def home(request):
     form = SignUpForm(request.POST or None)
     if form.is_valid():
@@ -45,6 +46,7 @@ def home(request):
         messages.success(request,'We will be in touch')
         return HttpResponseRedirect('/thank-you/')
     return render_to_response("signups.html",locals(),context_instance=RequestContext(request)) 
+
 
 def addIncentive(request):
 
@@ -63,15 +65,17 @@ def thankyou(request):
     
     return render_to_response("thankyou.html",locals(),context_instance=RequestContext(request))
 
+
 def wiki(request):
 
 
     return render_to_response("wiki.html",locals(),context_instance=RequestContext(request))
+
+
 def aboutus(request):
     
     
     return render_to_response("aboutus.html",locals(),context_instance=RequestContext(request))
-
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -80,6 +84,34 @@ class UserViewSet(viewsets.ModelViewSet):
     """
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
+
+
+def login(request):
+    if request.method == 'GET':
+        staa=request.GET
+        tmp = dict(staa.lists())
+        username=tmp[u'username'][0]
+        password=tmp[u'password'][0]
+        user=User.objects.get(username=username)
+        serializer = UserSerializer(user, many=True)
+      #  return JSONResponse(serializer.data)
+        if user.check_password(password):
+            token=Token.objects.get_or_create(user=user)
+            return JSONResponse("{'Token':'"+token[0].key+"'}")
+    if request.method == 'POST':
+        staa=request.GET
+        tmp = dict(staa.lists())
+        username=tmp[u'username'][0]
+        password=tmp[u'password'][0]
+        user=User.objects.get(username=username)
+        serializer = UserSerializer(user, many=True)
+      #  return JSONResponse(serializer.data)
+        if user.check_password(password):
+            token=Token.objects.get_or_create(user=user)
+            return JSONResponse("{'Token':'"+token[0].key+"'}")
+    return JSONResponse("{'Token':'0'}")
+
 
 from django.contrib.auth.models import User
 
@@ -92,6 +124,8 @@ class UserList(generics.ListAPIView):
 class UserDetail(generics.RetrieveAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
+
 
 class GroupViewSet(viewsets.ModelViewSet):
     """
@@ -163,19 +197,27 @@ def incetive_list(request):
         #incentive = Incentive.objects.all()
         staa=request.GET
         tmp = dict(staa.lists())
+        token = tmp[u'Token']
+        t=str(token[0])
+        testToken=None
+        try:
+            testToken=Token.objects.get(key=token[0])
+        except:
+            testToken=None
         incentive=None
-        for key in tmp:
-            if key=='tagID':
-                tags = Tag.objects.filter(tagID=tmp[key][0])
-                incentive=Incentive.objects.filter(tags=tags)
-            if key=='status':
-                incentive = Incentive.objects.filter(status=tmp[key])
-            if key=='groupIncentive':
-                incentive = Incentive.objects.filter(groupIncentive=tmp[key])
-            if key=='typeID':
-                incentive = Incentive.objects.filter(typeID =tmp[key][0])
-            if key == 'schemeID':
-                incentive = Incentive.objects.filter(schemeID=tmp[key][0])
+        if (testToken is not None):
+            for key in tmp:
+                if key == 'tagID':
+                    tags = Tag.objects.filter(tagID=tmp[key][0])
+                    incentive=Incentive.objects.filter(tags=tags)
+                if key == 'status':
+                    incentive = Incentive.objects.filter(status=tmp[key])
+                if key == 'groupIncentive':
+                    incentive = Incentive.objects.filter(groupIncentive=tmp[key])
+                if key == 'typeID':
+                    incentive = Incentive.objects.filter(typeID =tmp[key][0])
+                if key == 'schemeID':
+                    incentive = Incentive.objects.filter(schemeID=tmp[key][0])
         if incentive is None:
             return JSONResponse("{err:Wrong Argument}", status=404)
         serializer = IncentiveSerializer(incentive, many=True)
