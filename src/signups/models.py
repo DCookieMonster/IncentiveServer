@@ -76,3 +76,7 @@ class Incentive(models.Model):
 
     def __unicode__(self):
          return '%d: %s' % (self.schemeID, self.schemeName)
+
+class Document(models.Model):
+    owner = models.ForeignKey('auth.User', related_name='document')
+    docfile = models.FileField(upload_to='documents/%Y/%m/%d')

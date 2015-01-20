@@ -86,28 +86,18 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
 
 
-
+@csrf_exempt
 def login(request):
-    if request.method == 'GET':
-        staa=request.GET
-        tmp = dict(staa.lists())
-        username=tmp[u'username'][0]
-        password=tmp[u'password'][0]
-        user=User.objects.get(username=username)
-        serializer = UserSerializer(user, many=True)
-      #  return JSONResponse(serializer.data)
-        if user.check_password(password):
-            token=Token.objects.get_or_create(user=user)
-            return JSONResponse("{'Token':'"+token[0].key+"'}")
     if request.method == 'POST':
-        staa=request.GET
-        tmp = dict(staa.lists())
-        username=tmp[u'username'][0]
-        password=tmp[u'password'][0]
-        user=User.objects.get(username=username)
-        serializer = UserSerializer(user, many=True)
-      #  return JSONResponse(serializer.data)
-        if user.check_password(password):
+        data = JSONParser().parse(request)
+        username=data[u'username']
+        password=data[u'password']
+        user=None
+        try:
+            user=User.objects.get(username=username)
+        except:
+            pass
+        if user is not None and user.check_password(password):
             token=Token.objects.get_or_create(user=user)
             return JSONResponse("{'Token':'"+token[0].key+"'}")
     return JSONResponse("{'Token':'0'}")
@@ -344,3 +334,52 @@ class IncentiveView(APIView):
         """
         usernames = [incentive.status for incentive in Incentive.objects.all()]
         return Response(usernames)
+
+
+from django.shortcuts import render_to_response
+from django.template import RequestContext
+from django.http import HttpResponseRedirect
+from django.core.urlresolvers import reverse
+
+from models import Document
+from forms import DocumentForm
+
+def list(request):
+    # Handle file upload
+    if request.method == 'POST':
+        form = DocumentForm(request.POST, request.FILES)
+        if form.is_valid():
+            newdoc = Document(docfile = request.FILES['docfile'],owner=request.user)
+            newdoc.save()
+
+            # Redirect to the document list after POST
+            return HttpResponseRedirect(reverse('signups.views.list'))
+    else:
+        form = DocumentForm() # A empty, unbound form
+
+    # Load documents for the list page
+    documents=None
+    if request.user.is_active:
+        documents = Document.objects.filter(owner=request.user)
+
+    # Render list page with the documents and the form
+    return render_to_response('list.html', locals(), context_instance=RequestContext(request)
+    )
+
+
+def userProfile(request):
+
+    # Load documents for the list page
+    incentivesList=[]
+    incentives=None
+    if request.user.is_active:
+        incentives = Incentive.objects.filter(owner=request.user)
+        for incentive in incentives:
+             incentivesList.append(str(incentive.schemeID)+":"+incentive.schemeName)
+        documents = Document.objects.filter(owner=request.user)
+       # user=User.objects.get(username=request.user)
+
+    return render_to_response(
+        'profilePage.html',locals(),
+        context_instance=RequestContext(request)
+    )

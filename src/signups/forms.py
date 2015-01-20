@@ -9,3 +9,8 @@ class SignUpForm(forms.ModelForm):
 class IncentiveFrom(forms.ModelForm):
     class Meta:
         model=Incentive
+
+class DocumentForm(forms.Form):
+    docfile = forms.FileField(
+        label='Select a file'
+    )

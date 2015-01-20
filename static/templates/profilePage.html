@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block jumbotron %}
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+      <div class="container">
+           {% if user.is_authenticated %}
+               <h1>Hi, {{request.user.first_name}} {{ request.user.last_name }} </h1>
+               <h2>this is your profile</h2>
+           {% else %}
+        <h1>Your Profile</h1>
+           {% endif %}
+      </div>
+    </div>
+
+{% endblock %}
+{% block content %}
+		<!-- List of uploaded documents -->
+    {% block checkuser %}
+                                {% if user.is_authenticated %}
+		{% if incentives %}
+            <h3>Incentive:</h3>
+			<ul>
+			{% for incentive in incentivesList %}
+				<li style="font-size: 16px">{{ incentive }}</li>
+			{% endfor %}
+			</ul>
+
+		{% endif %}
+                                                <hr>
+
+            <h3>Data Sets:</h3>
+
+        {% if documents %}
+			<ul>
+			{% for document in documents %}
+				<li ><a href="{{ document.docfile.url }}" style="color: #222222; font-size: 16px;">{{ document.docfile.name }}</a></li>
+			{% endfor %}
+			</ul>
+		{% else %}
+			<p>No data set was uploaded yet.</p>
+		{% endif %}
+
+         {% else %}
+            <h1>You Need to Sign In first</h1>
+            {% endif %}
+            {% endblock%}
+{% endblock %}

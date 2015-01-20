@@ -18,3 +18,17 @@
 [19/Jan/2015 20:29:43]INFO[create] added new incentive:324234: ewrqwer
 [19/Jan/2015 20:30:13]INFO[create] added new incentive:324234: ewrqwer
 [19/Jan/2015 20:30:27]INFO[create] added new incentive:324234: DOR
+[20/Jan/2015 05:48:18]INFO[create] added new incentive:123123: SendEmail
+[20/Jan/2015 09:11:10]INFO[get_form] dor is seeing: 123123: SendEmail
+[20/Jan/2015 09:11:16]INFO[get_form] dor is seeing: 123123: SendEmail
+[20/Jan/2015 09:11:16]INFO[get_form] dor is seeing: None
+[20/Jan/2015 09:11:16]INFO[get_form] dor is seeing: 123123: SendEmail
+[20/Jan/2015 09:12:37]INFO[get_form] dor is seeing: Document object
+[20/Jan/2015 09:12:37]INFO[get_form] dor is seeing: None
+[20/Jan/2015 09:12:37]INFO[get_form] dor is seeing: Document object
+[20/Jan/2015 09:13:43]INFO[get_form] dor is seeing: Document object
+[20/Jan/2015 09:13:43]INFO[get_form] dor is seeing: None
+[20/Jan/2015 09:13:43]INFO[get_form] dor is seeing: Document object
+[20/Jan/2015 09:13:55]INFO[get_form] dor is seeing: Document object
+[20/Jan/2015 09:13:55]INFO[get_form] dor is seeing: None
+[20/Jan/2015 09:13:55]INFO[get_form] dor is seeing: Document object

@@ -4,7 +4,11 @@
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron">
       <div class="container">
-        <h1>Wellcome!</h1>
+          {% if user.is_authenticated %}
+        <h1>Wellcome Back {{ request.user.first_name }}!</h1>
+          {% else %}
+           <h1>Wellcome!</h1>
+          {% endif %}
           <p>This is the Incentive Server. login and find out all our features </p>
           <p><a class="btn btn-primary btn-lg" href="{% url 'wiki' %} %}" role="button">Learn more &raquo;</a></p>
       </div>

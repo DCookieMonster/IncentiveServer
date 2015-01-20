@@ -50,7 +50,6 @@ user_detail = UserViewSet.as_view({
     'get': 'retrieve'
 })
 
-
 # Routers provide a way of automatically determining the URL conf.
 router = routers.DefaultRouter()
 router.register(r'incentive', views.IncetiveViewSet)
@@ -122,22 +121,15 @@ urlpatterns = [
     url(r'^users/(?P<pk>[0-9]+)/$', views.UserDetail.as_view()),
     url(r'^incentives/$', views.incetive_list,name='incentive-list'),
     url(r'^login/$', views.login,name='login'),
-   # url(r'^thank-you/$', 'signups.views.thankyou', name='thankyou'),
-   # url(r'^about-us/$', 'signups.views.aboutus', name='aboutus'),
     url(r'^wiki/', views.wiki,name='wiki'),
     url(r'^aboutus/', views.aboutus,name='aboutus'),
-
+    url(r'^list/$', 'signups.views.list', name='data_set'),
+    url(r'^profile/', 'signups.views.userProfile', name='profile_page'),
 
 ]
 
-## Login and logout views for the browsable API
-#urlpatterns += [
-#    url(r'^api-auth/', include('rest_framework.urls',
-#                               namespace='rest_framework')),
-#]
 
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL,document_root=settings.STATIC_ROOT)
     urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
 
-    
