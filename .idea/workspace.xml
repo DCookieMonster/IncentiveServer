@@ -2,19 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1c159e93-9ba5-494b-9d80-f5e14c37fc37" name="Default" comment="Upload Data Set&#10;Profile Page&#10;Token authroziont">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/static/templates/profilePage.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/db.sqlite3" afterPath="$PROJECT_DIR$/src/db.sqlite3" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/signups/migrations/0001_initial.py" afterPath="$PROJECT_DIR$/src/signups/migrations/0001_initial.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/signups/admin.py" afterPath="$PROJECT_DIR$/src/signups/admin.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/templates/base.html" afterPath="$PROJECT_DIR$/static/templates/base.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/static/css/custom.css" afterPath="$PROJECT_DIR$/static/static/css/custom.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/signups/forms.py" afterPath="$PROJECT_DIR$/src/signups/forms.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/signups/models.py" afterPath="$PROJECT_DIR$/src/signups/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/mvp_landing/settings.py" afterPath="$PROJECT_DIR$/src/mvp_landing/settings.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/templates/signups.html" afterPath="$PROJECT_DIR$/static/templates/signups.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/trace.log" afterPath="$PROJECT_DIR$/src/trace.log" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/mvp_landing/urls.py" afterPath="$PROJECT_DIR$/src/mvp_landing/urls.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/signups/views.py" afterPath="$PROJECT_DIR$/src/signups/views.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="skillshare.iws" />
@@ -687,7 +674,13 @@
       <option name="project" value="LOCAL" />
       <updated>1421728664112</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Upload Data Set&#10;Profile Page&#10;Token authroziont">
+      <created>1421746459447</created>
+      <option name="number" value="00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1421746459447</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -740,7 +733,8 @@
     <MESSAGE value="filtering in get function &#10;/incentives?&lt;argument&gt;=&lt;value&gt;" />
     <MESSAGE value="filtering in get function &#10;Tokens" />
     <MESSAGE value="&#10;Tokens" />
-    <option name="LAST_COMMIT_MESSAGE" value="&#10;Tokens" />
+    <MESSAGE value="Upload Data Set&#10;Profile Page&#10;Token authroziont" />
+    <option name="LAST_COMMIT_MESSAGE" value="Upload Data Set&#10;Profile Page&#10;Token authroziont" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
