@@ -128,7 +128,7 @@ urlpatterns = [
     url(r'^profile/', 'signups.views.userProfile', name='profile_page'),
     url(r'^startAlg/', 'signups.runner.startAlg', name='startAlg'),
     url(r'^getInc/', 'signups.runner.getRatedIncentives', name='getInc'),
-    url(r'^getIncUser/$', 'signups.views.getUserID', name='get_user_id'),
+    url(r'^getIncUser/$', 'signups.views.getUserID', name='getIncUser'),
 
 
 ]

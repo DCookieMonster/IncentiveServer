@@ -256,6 +256,7 @@ def api_root(request, format=None):
         'incentive': reverse('incentive-list', request=request, format=format),
     })
 
+
 class IncentiveHighlight(generics.GenericAPIView):
     queryset = Incentive.objects.all()
     renderer_classes = (renderers.StaticHTMLRenderer,)
@@ -316,6 +317,7 @@ def incentiveTest(request):
              },
             indent=4))
 
+
 class IncentiveView(APIView):
     """
     View to list all users in the system.
@@ -344,6 +346,7 @@ from django.core.urlresolvers import reverse
 from models import Document
 from forms import DocumentForm
 
+
 def list(request):
     # Handle file upload
     if request.method == 'POST':
@@ -368,6 +371,8 @@ def list(request):
 
 from signups.runner import getTheBestForTheUser
 from forms import getUserForm
+
+
 def getUserID(request):
     # Handle file upload
     if request.method == 'POST':
