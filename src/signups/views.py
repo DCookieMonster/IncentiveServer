@@ -366,6 +366,24 @@ def list(request):
     return render_to_response('list.html', locals(), context_instance=RequestContext(request)
     )
 
+from signups.runner import getTheBestForTheUser
+from forms import getUserForm
+def getUserID(request):
+    # Handle file upload
+    if request.method == 'POST':
+        form = getUserForm(request.POST, request.FILES)
+        if form.is_valid():
+            newdoc = form.data[u'userID']
+            BestIncentive=getTheBestForTheUser(request,newdoc).content
+            # Redirect to the document list after POST
+ # Render list page with the documents and the form
+            return render_to_response('GetUser.html', locals(), context_instance=RequestContext(request))
+    else:
+        form = getUserForm() # A empty, unbound form
+
+    return render_to_response('GetUser.html', locals(), context_instance=RequestContext(request)
+    )
+
 
 def userProfile(request):
 

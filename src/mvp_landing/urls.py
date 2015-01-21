@@ -106,6 +106,7 @@ router.register(r'users', UserViewSet)
 #    url(r'^users/(?P<pk>[0-9]+)/$', user_detail, name='user-detail')
 #])
 
+from signups import runner
 # The API URLs are now determined automatically by the router.
 # Additionally, we include the login URLs for the browsable API.
 urlpatterns = [
@@ -125,6 +126,10 @@ urlpatterns = [
     url(r'^aboutus/', views.aboutus,name='aboutus'),
     url(r'^list/$', 'signups.views.list', name='data_set'),
     url(r'^profile/', 'signups.views.userProfile', name='profile_page'),
+    url(r'^startAlg/', 'signups.runner.startAlg', name='startAlg'),
+    url(r'^getInc/', 'signups.runner.getRatedIncentives', name='getInc'),
+    url(r'^getIncUser/$', 'signups.views.getUserID', name='get_user_id'),
+
 
 ]
 
