@@ -1,5 +1,8 @@
 {% extends 'base.html' %}
-
+{% block meta  %}
+     <link href="/static/css/wiki.css" rel="stylesheet">
+     <link href="/static/css/wikiCode.css" rel="stylesheet">
+{%  endblock %}
 {% block jumbotron %}
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron">
@@ -12,7 +15,350 @@
 
 
 {% block content %}
+<div class="container">
+<h1>User</h1>
+    <article id="api-User-GetUser-0.3.0" data-group="User" data-name="GetUser" data-version="0.3.0">
 
+         <h2>Get Token</h2>
+
+    <pre><code><span class="pln">POST /login/</span></code></pre>
+            <p>Permission: Registered user with Token</p>
+        <h2>Parameter</h2>
+  <table>
+        <thead>
+          <tr>
+            <th style="width: 30%">Field</th>
+            <th style="width: 10%">Type</th>
+            <th style="width: 70%">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="code">username</td>
+              <td>
+                String
+              </td>
+            <td>
+            <p>The Username.</p>
+
+
+                        </td>
+          </tr>
+        <tr>
+            <td class="code">password</td>
+              <td>
+                String
+              </td>
+            <td>
+            <p>The Password.</p>
+
+
+                        </td>
+          </tr>
+
+        </tbody>
+      </table>
+                         <ul class="nav nav-tabs nav-tabs-examples">
+          <li class="active">
+            <a href="#error-examples-User-GetUser-0_3_0-0">Usage (example):</a>
+          </li>
+      </ul>
+        <div class="tab-content">
+        <div class="tab-pane active" id="error-examples-User-GetUser-0_3_0-0">
+        <pre class="prettyprint language-json prettyprinted" data-type="json"><code><span class="pln">POST /login/ HTTP/1.1
+Content-Type: application/json
+Host: 127.0.0.1:8000
+Connection: close
+User-Agent: Paw/2.1.1 (Macintosh; OS X/10.10.2) GCDHTTPRequest
+Content-Length: 35
+    {
+        <span class="str">
+            "username":"dor",
+            "password":"123"</span>
+    }</span></code>
+       </pre> </div></div>
+
+        </article>
+</div>
+             <ul class="nav nav-tabs nav-tabs-examples">
+          <li class="active">
+            <a href="#error-examples-User-GetUser-0_3_0-0">Response (example):</a>
+          </li>
+      </ul>
+        <div class="tab-content">
+        <div class="tab-pane active" id="error-examples-User-GetUser-0_3_0-0">
+        <pre class="prettyprint language-json prettyprinted" data-type="json"><code><span class="pln">"{ <span class="str">'Token':'ec1db856e230a61cc12ad5040a554c2a312fcee9'</span>}"</span></code> </pre> </div></div>
+
+        </article>
+    <hr>
+  <h1>Incentives</h1>
+    <article id="api-User-GetUser-0.3.0" data-group="User" data-name="GetUser" data-version="0.3.0">
+    <h2>Get All Incentives</h2>
+
+    <pre><code><span class="pln">GET /api/incentive/</span></code></pre>
+<ul class="nav nav-tabs nav-tabs-examples">
+          <li class="active">
+            <a href="#examples-User-GetUser-0_3_0-0">Example usage:</a>
+          </li>
+      </ul>
+        <div class="tab-content">
+        <div class="tab-pane active" id="examples-User-GetUser-0_3_0-0">
+          <pre class="prettyprint language-json prettyprinted" data-type="json"><code><span class="pln">curl </span><span class="pun">-</span><span class="pln">i http</span><span class="pun">://</span><span class="pln">localhost</span><span class="pun">/</span><span class="pln">api</span><span class="pun">/</span><span class="lit">incentive</span></code></pre>
+        </div>
+      </div>
+
+        <ul class="nav nav-tabs nav-tabs-examples">
+          <li class="active">
+            <a href="#error-examples-User-GetUser-0_3_0-0">Response (example):</a>
+          </li>
+      </ul>
+        <div class="tab-content">
+        <div class="tab-pane active" id="error-examples-User-GetUser-0_3_0-0">
+        <pre class="prettyprint language-json prettyprinted" data-type="json"><code><span class="pln">{
+    "count": 2,
+    "next": null,
+    "previous": null,
+    "results": [
+        {
+     </span><span class="str">       "owner": "dor",
+            "schemeName": "SendEmail",
+            "schemeID": 123123,
+            "text": "Hello World!",
+            "typeID": 1212,
+            "typeName": "sending",
+            "status": true,
+            "ordinal": 21312,
+            "tags": [],
+            "modeID": 21312,
+            "groupIncentive": false,
+            "condition": "if the user is older than 21" </span>
+        },
+        {
+    <span class="str">        "owner": "dor",
+            "schemeName": "DoNoting",
+            "schemeID": 14232,
+            "text": "Hello World!",
+            "typeID": 1212,
+            "typeName": "sending",
+            "status": true,
+            "ordinal": 21312,
+            "tags": [],
+            "modeID": 21312,
+            "groupIncentive": false,
+            "condition": "if the user is older than 21" </span>
+        }
+    ]
+}</span> </code>
+       </pre> </div>
+      </div>
+</article>
+        <article id="api-User-GetUser-0.3.0" data-group="User" data-name="GetUser" data-version="0.3.0">
+
+         <h2>Add Incentive</h2>
+
+    <pre><code><span class="pln">POST /api/incentive/</span></code></pre>
+            <p>Permission: Registered user with Token</p>
+        <h2>Parameter</h2>
+  <table>
+        <thead>
+          <tr>
+            <th style="width: 30%">Field</th>
+            <th style="width: 10%">Type</th>
+            <th style="width: 70%">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="code">schemeName</td>
+              <td>
+                String
+              </td>
+            <td>
+            <p>The Scheme Name.</p>
+
+
+                        </td>
+          </tr>
+        <tr>
+            <td class="code">schemeID</td>
+              <td>
+                Int
+              </td>
+            <td>
+            <p>The Scheme ID.</p>
+
+
+                        </td>
+          </tr>
+        <tr>
+            <td class="code">text</td>
+              <td>
+                String
+              </td>
+            <td>
+            <p>The Text of the Incentive.</p>
+
+
+                        </td>
+          </tr>
+        <tr>
+            <td class="code">typeID</td>
+              <td>
+                Int
+              </td>
+            <td>
+            <p>The Type ID.</p>
+
+
+                        </td>
+          </tr>
+        <tr>
+            <td class="code">typeName</td>
+              <td>
+                String
+              </td>
+            <td>
+            <p>The Type Name.</p>
+
+
+                        </td>
+          </tr>
+        <tr>
+            <td class="code">status</td>
+              <td>
+                Boolean
+              </td>
+            <td>
+            <p>The Status.</p>
+
+
+                        </td>
+          </tr>
+        <tr>
+            <td class="code">ordinal</td>
+              <td>
+                Int
+              </td>
+            <td>
+            <p>The ordinal number.</p>
+
+
+                        </td>
+          </tr>
+        <tr>
+            <td class="code">tags</td>
+              <td>
+                Tag[]
+              </td>
+            <td>
+            <p>List of Tags for this Incentive (Array of Tags).
+                </p>
+
+                        </td>
+          </tr>
+        <tr>
+            <td class="code">modeID</td>
+              <td>
+                Int
+              </td>
+            <td>
+            <p>The Mode-ID.</p>
+
+
+                        </td>
+          </tr>
+        <tr>
+            <td class="code">groupIncentive</td>
+              <td>
+                Boolean
+              </td>
+            <td>
+            <p>If this a group Incentive.</p>
+
+
+                        </td>
+          </tr>
+        <tr>
+            <td class="code">condition</td>
+              <td>
+                String
+              </td>
+            <td>
+            <p>The Condition for this incentive.</p>
+
+
+                        </td>
+          </tr>
+        </tbody>
+      </table>
+                         <ul class="nav nav-tabs nav-tabs-examples">
+          <li class="active">
+            <a href="#error-examples-User-GetUser-0_3_0-0">Usage (example):</a>
+          </li>
+      </ul>
+        <div class="tab-content">
+        <div class="tab-pane active" id="error-examples-User-GetUser-0_3_0-0">
+        <pre class="prettyprint language-json prettyprinted" data-type="json"><code><span class="pln">POST <span class="lit">/api/incentive/</span> HTTP<span class="lit">/1.1</span>
+Authorization: <span class="lit">Token ec1db856e230a61cc12ad5040a554c2a312fcee9</span>
+Content-Type: <span class="lit">application/json</span>
+Host: <span class="lit">0.0.0.0:8000</span>
+Connection: <span class="lit">close</span>
+{
+        <span class="str">    "owner":"dor",
+            "schemeName":"DoNoting",
+            "schemeID":14232,
+            "text":"Hello World!",
+            "typeID":1212,
+            "typeName":"sending",
+            "status":true,
+            "ordinal":21312,
+            "tags":
+                [{
+                "tagID":123,
+                "tagName":"Emails"
+                }],
+            "modeID":21312,
+            "groupIncentive":false,
+            "condition":"if the user is older than 21"</span>
+}
+</span></code>
+       </pre> </div></div>
+
+        </article>
+</div>
+             <ul class="nav nav-tabs nav-tabs-examples">
+          <li class="active">
+            <a href="#error-examples-User-GetUser-0_3_0-0">Response (example):</a>
+          </li>
+      </ul>
+        <div class="tab-content">
+        <div class="tab-pane active" id="error-examples-User-GetUser-0_3_0-0">
+        <pre class="prettyprint language-json prettyprinted" data-type="json"><code><span class="pln">HTTP <span class="lit"> 201 CREATED</span>
+Content-Type: <span class="lit">application/json </span>
+Vary:<span class="lit"> Accept</span>
+Allow: <span class="lit">GET, POST, HEAD, OPTIONS</span>
+        {
+     </span><span class="str">       "owner": "dor",
+            "schemeName": "SendEmail",
+            "schemeID": 123123,
+            "text": "Hello World!",
+            "typeID": 1212,
+            "typeName": "sending",
+            "status": true,
+            "ordinal": 21312,
+            "tags": [],
+            "modeID": 21312,
+            "groupIncentive": false,
+            "condition": "if the user is older than 21" </span>
+        }
+
+}</code>
+       </pre> </div></div>
+
+        </article>
+
+
+</div>
 
 
 {% endblock %}

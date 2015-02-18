@@ -74,25 +74,26 @@ WSGI_APPLICATION = 'mvp_landing.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
-
-# change it to mysql server
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'DB_NAME',
-#         'USER': 'DB_USER',
-#         'PASSWORD': 'DB_PASSWORD',
-#         'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
-#         'PORT': '3306',
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 #     }
 # }
+
+# TODO create mysql server
+# TODO change the local DB to mysql DB
+import MySQLdb
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'Lassi',
+        'USER': 'root',
+        'PASSWORD': '9670',
+        'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
+        'PORT': '3306',
+    }
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
@@ -159,7 +160,7 @@ LOGIN_REDIRECT_URL = 'profile_page'
 #         },
 #     }
 # }
-
+# TODO change the logger to connect to the DB and write a record and not to file
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': True,
