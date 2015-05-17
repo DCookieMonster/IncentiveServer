@@ -357,6 +357,82 @@ Allow: <span class="lit">GET, POST, HEAD, OPTIONS</span>
 
         </article>
 
+    <hr>
+    <h1>Algorithm</h1>
+    <article id="api-User-GetUser-0.3.0" data-group="User" data-name="GetUser" data-version="0.3.0">
+
+         <h2>Start Algorithm</h2>
+
+    <pre><code><span class="pln">POST /startAlg/</span></code></pre>
+            <p>Permission: Logged In User</p>
+
+
+             <ul class="nav nav-tabs nav-tabs-examples">
+          <li class="active">
+            <a href="#error-examples-User-GetUser-0_3_0-0">Response (example):</a>
+          </li>
+      </ul>
+        <div class="tab-content">
+        <div class="tab-pane active" id="error-examples-User-GetUser-0_3_0-0">
+        <pre class="prettyprint language-json prettyprinted" data-type="json"><code><span class="pln">"{ <span class="str">"Alg":"success"</span>}"</span></code> </pre> </div></div>
+        <hr><hr>
+        <h2>Get The Best Incentive for this User</h2>
+
+    <pre><code><span class="pln">POST /getIncUser/</span></code></pre>
+            <p>Permission: Logged In User</p>
+        <h2>Parameter</h2>
+  <table>
+        <thead>
+          <tr>
+            <th style="width: 30%">Field</th>
+            <th style="width: 10%">Type</th>
+            <th style="width: 70%">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="code">userID</td>
+              <td>
+                String
+              </td>
+            <td>
+            <p>The User Id.</p>
+
+
+                        </td>
+          </tr>
+        </tbody>
+      </table>
+                         <ul class="nav nav-tabs nav-tabs-examples">
+          <li class="active">
+            <a href="#error-examples-User-GetUser-0_3_0-0">Usage (example):</a>
+          </li>
+      </ul>
+        <div class="tab-content">
+        <div class="tab-pane active" id="error-examples-User-GetUser-0_3_0-0">
+        <pre class="prettyprint language-json prettyprinted" data-type="json"><code><span class="pln"> HTTP<span class="lit">/1.1</span>
+Authorization: <span class="lit">Token ec1db856e230a61cc12ad5040a554c2a312fcee9</span>
+Content-Type: <span class="lit">application/json</span>
+Host: <span class="lit">0.0.0.0:8000</span>
+Connection: <span class="lit">close</span>
+    {
+        <span class="str">
+            "userID":"111"</span>
+    }</span></code>
+       </pre> </div></div>
+
+        </article>
+             <ul class="nav nav-tabs nav-tabs-examples">
+          <li class="active">
+            <a href="#error-examples-User-GetUser-0_3_0-0">Response (example):</a>
+          </li>
+      </ul>
+        <div class="tab-content">
+        <div class="tab-pane active" id="error-examples-User-GetUser-0_3_0-0">
+        <pre class="prettyprint language-json prettyprinted" data-type="json"><code><span class="pln">"{ <span class="str">"schemeID":"123"</span>}"</span></code> </pre> </div></div>
+
+        </article>
+
 
 </div>
 

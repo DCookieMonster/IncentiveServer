@@ -149,24 +149,6 @@ class IncetiveViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
 
-# class TagViewSet(viewsets.ModelViewSet):
-#     """
-#     This viewset automatically provides `list`, `create`, `retrieve`,
-#     `update` and `destroy` actions.
-#
-#     Additionally we also provide an extra `highlight` action.
-#     """
-#     queryset = Tag.objects.all()
-#     serializer_class = TagSerializer
-#   #  permission_classes = (permissions.IsAuthenticatedOrReadOnly,IsOwnerOrReadOnly,)
-#
-#     @detail_route(renderer_classes=[renderers.StaticHTMLRenderer])
-#     def highlight(self, request, *args, **kwargs):
-#         tag = self.get_object()
-#         return Response(tag.highlighted)
-#
-#     def perform_create(self, serializer):
-#                    serializer.save()
 
 
 class JSONResponse(HttpResponse):

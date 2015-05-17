@@ -54,61 +54,7 @@ user_detail = UserViewSet.as_view({
 router = routers.DefaultRouter()
 router.register(r'incentive', views.IncetiveViewSet)
 router.register(r'users', UserViewSet)
-#urlpatterns = patterns('',
-#    # Examples:
-#   url(r'^$', 'signups.views.home', name='home'),
-#    # url(r'^blog/', include('blog.urls')),
-#    url(r'^thank-you/$', 'signups.views.thankyou', name='thankyou'),
-#    url(r'^about-us/$', 'signups.views.aboutus', name='aboutus'),
-#    url(r'^users/$', views.UserList.as_view()),
-#    url(r'^users/(?P<pk>[0-9]+)/$', views.UserDetail.as_view()),
-#    #url(r'^Json/$', 'signups.views.json', name='json'),
-#    #url(r'^incetive/$', views.incetive_list,name='incetive-list'),
-#    #url(r'^invetive/(?P<pk>[0-9]+)/$', views.incetive_detail,name='incetive-detail'),
-#    url(r'^incentives/$', views.IncentiveList.as_view()),
-#    url(r'^incetnives/(?P<pk>[0-9]+)/$', views.IncentiveDetail.as_view()),
-#    url(r'^admin/', include(admin.site.urls)),
-#    url(r'^', include(router.urls)),
-#    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-#    url(r'^$', views.api_root),
-#    url(r'^incentive/(?P<pk>[0-9]+)/highlight/$', views.IncentiveHighlight.as_view()),
-#)
-#
-#
-#urlpatterns = format_suffix_patterns(urlpatterns)
 
-## API endpoints
-#urlpatterns = format_suffix_patterns([
-#    url(r'^$', views.api_root),
-#    url(r'^incentive/$',
-#        views.IncentiveList.as_view(),
-#        name='incentive-list'),
-#    url(r'^snippets/(?P<pk>[0-9]+)/$',
-#        views.IncentiveDetail.as_view(),
-#        name='incentive-detail'),
-#    url(r'^snippets/(?P<pk>[0-9]+)/highlight/$',
-#        views.IncentiveHighlight.as_view(),
-#        name='incentive-highlight'),
-#    url(r'^users/$',
-#        views.UserList.as_view(),
-#        name='user-list'),
-#    url(r'^users/(?P<pk>[0-9]+)/$',
-#        views.UserDetail.as_view(),
-#        name='user-detail')
-#])
-
-#urlpatterns = format_suffix_patterns([
-#    url(r'^$', api_root),
-#    url(r'^incentive/$', incentive_list, name='incentive-list'),
-#    url(r'^incentive/(?P<pk>[0-9]+)/$', incentive_detail, name='incentive-detail'),
-#    url(r'^incentive/(?P<pk>[0-9]+)/highlight/$', incentive_highlight, name='incentive-highlight'),
-#    url(r'^users/$', user_list, name='user-list'),
-#    url(r'^users/(?P<pk>[0-9]+)/$', user_detail, name='user-detail')
-#])
-
-from signups import runner
-# The API URLs are now determined automatically by the router.
-# Additionally, we include the login URLs for the browsable API.
 urlpatterns = [
     url(r'^api/', include(router.urls)),
     url(r'^about/$', views.about),
@@ -120,7 +66,7 @@ urlpatterns = [
     url(r'^add/','signups.views.addIncentive',name='add'),
     url(r'^users/$', views.UserList.as_view()),
     url(r'^users/(?P<pk>[0-9]+)/$', views.UserDetail.as_view()),
-    url(r'^incentives/$', views.incetive_list,name='incentive-list'),
+    url(r'^incentives/$', views.incetive_list,name='incentives'),
     url(r'^login/$', views.login,name='login'),
     url(r'^wiki/', views.wiki,name='wiki'),
     url(r'^aboutus/', views.aboutus,name='aboutus'),
